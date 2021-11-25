@@ -1,5 +1,6 @@
 import { Command } from "commander";
 
+// export the handler for testing purposes
 export function helloAction(name: string = "friend", options?: Record<string, unknown>): void {
   if (options?.yell) {
     console.log(`Hello, ${name}.`.toUpperCase());
