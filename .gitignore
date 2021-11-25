@@ -1,0 +1,6 @@
+.git
+.env
+.vscode
+node_modules
+build
+coverage
