@@ -1,8 +1,8 @@
 #!/usr/bin/env node --experimental-modules=node --experimental-specifier-resolution=node
 
-import { Command } from "commander";
+import { Command } from 'commander';
 
-import { helloCommand } from "./commands";
+import { helloCommand } from './commands/index.js';
 
 const program = new Command();
 
