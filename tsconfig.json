@@ -5,16 +5,10 @@
     "moduleResolution": "node",
     "lib": ["ES2020"],
     "outDir": "./build",
-    "rootDir": "./src",
     "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
     "forceConsistentCasingInFileNames": true,
     "strict": true,
-    "types": ["jest", "node", "commander"]
-  },
-  "include": ["src"],
-  "ts-node": {
-    "moduleTypes": {
-      "jest.config.ts": "cjs"
-    }
+    "skipLibCheck": true,
   }
 }
