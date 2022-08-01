@@ -1,7 +1,7 @@
 import { jest } from '@jest/globals';
 import { Command } from 'commander';
 
-import { helloAction, helloCommand } from '../../src/commands/hello.command.js';
+import { helloHandler, helloCommand } from '../../src/commands/hello.command.js';
 
 const logSpy = jest.spyOn(console, 'log').mockImplementation(() => {});
 
@@ -23,7 +23,7 @@ describe('src/commands/hello.command.ts', () => {
   ])(
     'when helloCommand is called with %p and %p as arguments, output is %p',
     (name?: string, options?: Record<string, unknown>, expected?: string) => {
-      helloAction(name, options);
+      helloHandler(name, options);
       expect(logSpy).toHaveBeenCalledWith(expected);
     },
   );
