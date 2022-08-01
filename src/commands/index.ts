@@ -1,1 +1,1 @@
-export { helloCommand } from './hello.command.js';
+export { helloAction, helloCommand } from './hello.command.js';

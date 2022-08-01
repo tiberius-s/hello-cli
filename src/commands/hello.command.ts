@@ -1,7 +1,7 @@
-import { Command } from "commander";
+import { Command } from 'commander';
 
 // export the handler for testing purposes
-export function helloAction(name: string = "friend", options?: Record<string, unknown>): void {
+export function helloAction(name = 'friend', options?: Record<string, unknown>): void {
   if (options?.yell) {
     console.log(`Hello, ${name}.`.toUpperCase());
     return;
@@ -10,9 +10,9 @@ export function helloAction(name: string = "friend", options?: Record<string, un
 }
 
 export function helloCommand(): Command {
-  const hello = new Command("hello");
+  const hello = new Command('hello');
 
-  hello.argument("[name]").option("-y, --yell", "ALL CAPS!").action(helloAction);
+  hello.argument('[name]').option('-y, --yell', 'ALL CAPS!').action(helloAction);
 
   return hello;
 }

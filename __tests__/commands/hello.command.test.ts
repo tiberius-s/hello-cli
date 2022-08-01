@@ -1,9 +1,9 @@
 import { jest } from '@jest/globals';
 import { Command } from 'commander';
 
-const logSpy = jest.spyOn(console, 'log').mockImplementation(() => {});
-
 import { helloAction, helloCommand } from '../../src/commands/hello.command.js';
+
+const logSpy = jest.spyOn(console, 'log').mockImplementation(() => {});
 
 describe('src/commands/hello.command.ts', () => {
   afterEach(() => {
@@ -16,10 +16,10 @@ describe('src/commands/hello.command.ts', () => {
   });
 
   test.each([
-    ['buddy', { yell: false }, `Hello, buddy.`],
-    ['buddy', { yell: true }, `Hello, buddy.`.toUpperCase()],
-    [undefined, { yell: false }, `Hello, friend.`],
-    [undefined, { yell: true }, `Hello, friend.`.toUpperCase()],
+    ['buddy', { yell: false }, 'Hello, buddy.'],
+    ['buddy', { yell: true }, 'Hello, buddy.'.toUpperCase()],
+    [undefined, { yell: false }, 'Hello, friend.'],
+    [undefined, { yell: true }, 'Hello, friend.'.toUpperCase()],
   ])(
     'when helloCommand is called with %p and %p as arguments, output is %p',
     (name?: string, options?: Record<string, unknown>, expected?: string) => {
