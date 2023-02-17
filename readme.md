@@ -6,4 +6,4 @@ After installing and building the project, run `npm link` to link the bin global
 
 Project is set up to run on Node 14 or higher since it relies on native ESM support. Some configuration changes will be needed to target CommonJS.
 
-Another win is the project has a working Jest configuration with ts-node and ESM.
+Unit tests are setup with [vitest](https://vitest.dev/)
