@@ -1,6 +1,6 @@
 {
   "name": "hello-cli",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "A basic CLI written in TypeScript meant to be used as an example or project starter",
   "type": "module",
   "main": "./build/cli.js",
