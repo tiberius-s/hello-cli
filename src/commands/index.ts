@@ -1,1 +1,1 @@
-export { helloHandler, helloCommand } from './hello.command.js';
+export * from './hello.command.js';

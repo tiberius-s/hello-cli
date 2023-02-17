@@ -1,12 +1,12 @@
-import { jest } from '@jest/globals';
+import { beforeEach, describe, expect, test, vi } from 'vitest';
 import { Command } from 'commander';
 
-import { helloHandler, helloCommand } from '../../src/commands/hello.command.js';
+import { helloHandler, helloCommand } from '@/commands/hello.command.js';
 
-const logSpy = jest.spyOn(console, 'log').mockImplementation(() => {});
+const logSpy = vi.spyOn(console, 'log').mockImplementation(() => null);
 
 describe('src/commands/hello.command.ts', () => {
-  afterEach(() => {
+  beforeEach(() => {
     logSpy.mockClear();
   });
 
