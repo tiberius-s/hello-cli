@@ -40,7 +40,15 @@ jobs:
         run: npm test
 
       - name: Build
-        run: npm run build
+        run: npm run build:ci
+
+      - name: Verify build outputs
+        run: |
+          test -f build/esm/src/cli.js || (echo "ESM build failed" && exit 1)
+          test -f build/cjs/src/cli.js || (echo "CJS build failed" && exit 1)
+          test -x build/esm/src/cli.js || (echo "ESM cli not executable" && exit 1)
+          test -x build/cjs/src/cli.js || (echo "CJS cli not executable" && exit 1)
+          echo "✓ Build outputs verified"
 
       - name: Run integration tests
         run: npm run test:integration

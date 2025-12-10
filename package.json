@@ -31,9 +31,10 @@
   },
   "scripts": {
     "prebuild": "npm run format:fix && npm run lint && npm run typecheck && rm -rf ./build",
-    "build:esm": "swc src --config-file .swcrc-esm -d build/esm --ignore '**/*.test.ts' && tsc-alias -p tsconfig.json --outDir build/esm --resolve-full-paths",
-    "build:cjs": "swc src --config-file .swcrc-cjs -d build/cjs --ignore '**/*.test.ts' && tsc-alias -p tsconfig.json --outDir build/cjs --resolve-full-paths && echo '{\"type\":\"commonjs\"}' > build/cjs/package.json",
+    "build:esm": "swc src --config-file .swcrc-esm -d build/esm --ignore '**/*.test.ts' && tsc-alias -p tsconfig.json --outDir build/esm --resolve-full-paths || exit 1",
+    "build:cjs": "swc src --config-file .swcrc-cjs -d build/cjs --ignore '**/*.test.ts' && tsc-alias -p tsconfig.json --outDir build/cjs --resolve-full-paths && echo '{\"type\":\"commonjs\"}' > build/cjs/package.json || exit 1",
     "build": "npm run build:esm && npm run build:cjs && node ./add-shebang.js",
+    "build:ci": "rm -rf ./build && npm run build:esm && npm run build:cjs && node ./add-shebang.js",
     "build:debug": "swc --config-file .swcrc-esm -s true -D src -d build/esm",
     "typecheck": "tsc --noEmit",
     "prepublishOnly": "npm run typecheck && npm run lint && npm test && npm run build",
