@@ -1,0 +1,20 @@
+{
+  "$schema": "https://swc.rs/schema.json",
+  "jsc": {
+    "target": "esnext",
+    "parser": {
+      "syntax": "typescript"
+    },
+    "baseUrl": "./src",
+    "paths": {
+      "@/*": [
+        "*"
+      ]
+    }
+  },
+  "module": {
+    "type": "es6",
+    "ignoreDynamic": true
+  },
+  "sourceMaps": true
+}
