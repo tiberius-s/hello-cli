@@ -10,10 +10,6 @@ All notable changes to this project will be documented in this file.
 - **Tests**: Unit and integration suites split into separate Vitest configs
 - **Build**: CI builds once (`build:ci`) before running integration tests; Codecov upload is best-effort
 
-### Fixed
-
-- **Integration CI**: Missing build outputs resolved by running build ahead of integration and skipping format:fix in CI
-
 ## [0.3.1] - 2025-12-09
 
 ### Changed
