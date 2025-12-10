@@ -7,10 +7,7 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 export default defineConfig({
   test: {
     exclude: ["**/node_modules/**", "**/build/**"],
-    include: ["src/**/*.{test,spec}.{js,ts}"],
-    coverage: {
-      reporter: ["text", "json", "html"],
-    },
+    include: ["tests/integration/**/*.{test,spec}.{js,ts}"],
   },
   resolve: {
     alias: {
