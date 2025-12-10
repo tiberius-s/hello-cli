@@ -56,8 +56,8 @@ describe("Module Format Verification", () => {
 
   describe("Build Structure", () => {
     test("should have executables with shebangs", () => {
-      const esmCli = readFileSync("./build/esm/cli.js", "utf-8");
-      const cjsCli = readFileSync("./build/cjs/cli.js", "utf-8");
+      const esmCli = readFileSync("./build/esm/src/cli.js", "utf-8");
+      const cjsCli = readFileSync("./build/cjs/src/cli.js", "utf-8");
 
       expect(esmCli).toMatch(/^#!\/usr\/bin\/env node/);
       expect(cjsCli).toMatch(/^#!\/usr\/bin\/env node/);
