@@ -2,81 +2,52 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.3.2] - 2025-12-10
+
+### Changed
+
+- **CI**: Main-only triggers, concurrency cancellation, Node 20/22 matrix, unit tests run with coverage
+- **Tests**: Unit and integration suites split into separate Vitest configs
+- **Build**: CI builds once (`build:ci`) before running integration tests; Codecov upload is best-effort
+
+### Fixed
+
+- **Integration CI**: Missing build outputs resolved by running build ahead of integration and skipping format:fix in CI
+
 ## [0.3.1] - 2025-12-09
 
 ### Changed
 
-- **Build Process Simplification**: Removed wrapper script complexity in favor of direct SWC compilation
-- **Postbuild Script**: Replaced `insert-shebang.sh` with lightweight `add-shebang.js` Node script
-- **CJS Package Generation**: Now generated inline in build script instead of via wrapper
-- **README**: Updated "How It Works" section to reflect simplified build architecture
-- **GitHub Actions**: Added CI workflow for automated testing on Node 20 and 22
-
-### Technical Details
-
-Build Process (Simplified):
-
-1. Prebuild: format:fix → lint → typecheck → clean
-2. Compile: SWC compiles source to both `build/esm/src/` and `build/cjs/src/`
-3. Path Resolution: `tsc-alias` transforms `@/` imports to relative paths
-4. Executables: `add-shebang.js` adds shebangs and sets executable permissions
-5. CJS Marker: `package.json` with `"type":"commonjs"` created in `build/cjs/`
-
-Entry Points:
-
-- ESM: `build/esm/src/cli.js` (executable)
-- CJS: `build/cjs/src/cli.js` (executable)
+- **Build**: Simplified to direct SWC outputs plus a lightweight `add-shebang.js` script
+- **Docs**: README "How It Works" refreshed for the new build shape
+- **CI**: Added GitHub Actions on Node 20/22
 
 ## [0.3.0] - 2025-12-09
 
 ### Added
 
-- **Dual Build System**: Project compiles to both ESM (`build/esm/`) and CommonJS (`build/cjs/`) with proper module format markers
-- **Path Aliases**: TypeScript path aliases (`@/*`) work throughout codebase and resolve to relative paths in output
-- **Build Validation**: Code quality checks (format, lint, typecheck) run automatically in prebuild step
-- **Source Maps**: Both ESM and CJS builds include source maps for debugging
-- **ESM dirname Utility**: New `getDirname()` utility for ES module-compatible directory resolution
-- **Comprehensive Tests**: 27 total tests (9 unit + 18 integration) with 100% code coverage
-- **Integration Test Suite**: Dedicated `tests/integration/` with build output and module format validation
-- **JSDoc Comments**: All functions documented for IDE support and clarity
-- **Improved README**: Comprehensive documentation with features, usage, and architecture explanation
+- **Dual Outputs**: ESM and CJS builds with source maps and path alias resolution
+- **Tests**: 27 total (unit + integration) plus coverage; integration suite validates build outputs
+- **Docs**: README expanded; JSDoc coverage improved
 
 ### Changed
 
-- **Tooling Migration**: Replaced ESLint + Prettier with Biome for unified linting/formatting
-- **Node Version**: Updated from 16+ to 20+ for stable ESM support without flags
-- **Build Scripts**: Restructured with separate SWC configurations for ESM and CJS
-- **CLI Implementation**: Enhanced with better error handling and version management
-- **Testing Framework**: Upgraded from Vite test to dedicated Vitest with coverage
-- **Project Structure**: Added utilities folder and proper test file organization
+- **Tooling**: ESLint/Prettier replaced by Biome; Vitest adopted with coverage
+- **Runtime**: Node requirement raised to 20+ for stable ESM; build scripts split per format
 
 ### Removed
 
-- ESLint configuration and plugins
-- Prettier configuration
-- Old single build configuration (`.swcrc`)
-- Unreachable Node version check code
+- Legacy lint/format configs and the single `.swcrc`
+- Unreachable Node version guard
 
 ### Fixed
 
-- Test file exclusion from production builds
-- Path alias transformation for both module formats
-- Vitest configuration to prevent test discovery in build directory
-- CJS module format declaration
+- Test files excluded from builds; aliases resolved correctly; build dir no longer scanned by tests
 
 ### Dependencies Updated
 
-- TypeScript: 4.9.5 → 5.9.3
-- SWC: 1.3.35 → 1.15.3
-- Commander: 10.0.0 → 14.0.2
-- Vitest: 0.28.5 → 4.0.15
-- Biome: 2.3.8 (new)
-- tsc-alias: 1.8.16 (new)
-- @vitest/coverage-v8: 4.0.15 (new)
+- TypeScript, SWC, Commander, Vitest, Biome, tsc-alias, @vitest/coverage-v8
 
 ### Breaking Changes
 
-- Requires Node.js 20+ (was 16+)
-- Dual ESM/CJS structure replaces single build output
-- Package exports field specifies import/require conditions
-- CLI now uses Biome instead of ESLint/Prettier
+- Requires Node 20+ and dual ESM/CJS outputs; exports now specify import/require conditions
