@@ -45,6 +45,7 @@
     "lint:fix": "biome lint --write ./src",
     "test": "vitest run",
     "test:integration": "npm run build && vitest run tests/integration",
+    "test:integration:ci": "vitest run tests/integration",
     "test:all": "npm test && npm run test:integration",
     "test:cov": "vitest run --coverage"
   },
