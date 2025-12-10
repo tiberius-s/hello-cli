@@ -56,11 +56,13 @@ Run `npm run clean` to remove build artifacts and node_modules.
 
 ## How It Works
 
-The dual build system uses SWC with two separate configurations: `.swcrc-esm` compiles source code to ES modules in `build/esm/`, while `.swcrc-cjs` compiles the same source to CommonJS in `build/cjs/`. Both configs reference `@/` path aliases defined in `tsconfig.json`.
+The dual build system compiles source code once, then generates both ESM and CommonJS outputs. SWC reads the same TypeScript source but uses two separate configurations: `.swcrc-esm` produces ES modules in `build/esm/`, while `.swcrc-cjs` produces CommonJS in `build/cjs/`. Both preserve the directory structure and include source maps.
 
-After SWC compiles, `tsc-alias` transforms those `@/` imports to relative paths in both output directories so they resolve correctly without TypeScript at runtime. Finally, `insert-shebang.sh` wraps both compiled `cli.js` files with executable shebangs—the ESM version uses dynamic `import()`, the CJS version uses `require()` and generates a `package.json` marker.
+Path aliases (`@/*`) are configured in both SWC configs and resolved to relative imports at compile time via `tsc-alias`, so they work without TypeScript at runtime.
 
-The build validates code quality first: `npm run build` runs the prebuild step (type checking, linting, formatting) before compilation, ensuring only clean code makes it to the output.
+The entry points (`build/esm/src/cli.js` and `build/cjs/src/cli.js`) get shebangs added via a simple Node script in the postbuild step. For CJS, a `package.json` file is generated in the output to explicitly declare the module format.
+
+Quality checks run before any compilation: `npm run build` executes the prebuild step (format, lint, typecheck) to ensure only clean code makes it to the output.
 
 ## Technologies
 
