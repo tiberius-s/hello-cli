@@ -10,10 +10,11 @@ All notable changes to this project will be documented in this file.
 - **Postbuild Script**: Replaced `insert-shebang.sh` with lightweight `add-shebang.js` Node script
 - **CJS Package Generation**: Now generated inline in build script instead of via wrapper
 - **README**: Updated "How It Works" section to reflect simplified build architecture
+- **GitHub Actions**: Added CI workflow for automated testing on Node 20 and 22
 
 ### Technical Details
 
-**Build Process (Simplified):**
+Build Process (Simplified):
 
 1. Prebuild: format:fix → lint → typecheck → clean
 2. Compile: SWC compiles source to both `build/esm/src/` and `build/cjs/src/`
@@ -21,7 +22,7 @@ All notable changes to this project will be documented in this file.
 4. Executables: `add-shebang.js` adds shebangs and sets executable permissions
 5. CJS Marker: `package.json` with `"type":"commonjs"` created in `build/cjs/`
 
-**Entry Points:**
+Entry Points:
 
 - ESM: `build/esm/src/cli.js` (executable)
 - CJS: `build/cjs/src/cli.js` (executable)
